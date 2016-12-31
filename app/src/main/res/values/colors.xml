@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#B72629</color>
+    <color name="colorPrimaryDark">#B72629</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <!--GridView colors-->
+    <color name="store_name">#ffffff</color>
+    <color name="distance_color">#ffc9cb</color>
+    <color name="header_shadow">#CABBBBBB</color>
+    <color name="sumup_bar">#ffffff</color>
+
+
+    <!--StoreView colors-->
+    <color name="store_name1">#212121</color>
+    <color name="distance_color1">#4285f4</color>
+
+
+
+</resources>

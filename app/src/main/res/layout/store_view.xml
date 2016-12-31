@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+    <ImageView
+        android:id="@+id/picture"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorAccent"
+        android:adjustViewBounds="true"
+        android:layout_below="@id/header"
+        />
+    <RelativeLayout
+        android:id="@+id/sumup_bar"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@color/sumup_bar"
+        android:layout_alignParentBottom="true">
+
+            <TextView
+                android:id="@+id/store_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/store_size1"
+                android:paddingLeft="20dp"
+                android:paddingRight="10dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="0dp"
+                android:textColor="@color/store_name1"
+                />
+
+            <ImageView
+                android:id="@+id/gift"
+                android:layout_width="@dimen/gift1"
+                android:layout_height="@dimen/gift1"
+                android:layout_margin="@dimen/gift_margin"
+                android:adjustViewBounds="true"
+                android:layout_below="@+id/store_name"
+                android:src="@drawable/gift_100"
+                />
+    </RelativeLayout>
+    <ImageView
+        android:id="@+id/direction_button"
+        android:layout_width="@dimen/dir_button"
+        android:layout_height="@dimen/dir_button"
+        android:src="@drawable/direction_button"
+        android:layout_alignParentRight="true"
+        android:layout_above="@id/sumup_bar"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="@dimen/dir_overlap"
+        />
+    <TextView
+        android:id="@+id/distance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="0dp"
+        android:paddingRight="10dp"
+        android:layout_marginTop="@dimen/dir_overlap_inv"
+        android:textSize="@dimen/distance_size1"
+        android:textColor="@color/distance_color1"
+        android:text="4 miles"
+        android:layout_below="@+id/direction_button"
+        android:layout_alignRight="@+id/direction_button"
+        android:layout_alignEnd="@+id/direction_button"
+        android:gravity="center"/>
+
+</RelativeLayout>
