@@ -6,6 +6,9 @@
     <!--Header dimensions-->
     <dimen name="header_height">60dp</dimen>
     <dimen name="header_margin">3dp</dimen>
+    <dimen name="toggle_height">30dp</dimen>
+    <dimen name="toggle_width">150dp</dimen>
+    <dimen name="toggle_corners">20dp</dimen>
 
     <!--GridView dimensions-->
     <dimen name="square_margin">2dp</dimen>

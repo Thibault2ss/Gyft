@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.LinearLayout;
 
 
@@ -59,6 +60,24 @@ public class MainActivity extends Activity {
                 }
             });
         }
+        final Button gridview_button = (Button) header.findViewById(R.id.gridview_button);
+        final Button storeview_button = (Button) header.findViewById(R.id.storeview_button);
+        View.OnClickListener toggleListener  = new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                if (view.getId() == R.id.gridview_button){
+                    gridview_button.setSelected(true);
+                    storeview_button.setSelected(false);
+                }
+                else{
+                    gridview_button.setSelected(false);
+                    storeview_button.setSelected(true);
+                }
+            }
+        };
+        gridview_button.setOnClickListener(toggleListener);
+        storeview_button.setOnClickListener(toggleListener);
+        gridview_button.performClick();
     }
 
     public void getWindowDim(){
