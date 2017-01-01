@@ -9,6 +9,8 @@
     <dimen name="toggle_height">30dp</dimen>
     <dimen name="toggle_width">150dp</dimen>
     <dimen name="toggle_corners">20dp</dimen>
+    <dimen name="margin_img_toggle">5dp</dimen>
+    <dimen name="margin_bottom_toggle">12dp</dimen>
 
     <!--GridView dimensions-->
     <dimen name="square_margin">2dp</dimen>

@@ -3,6 +3,8 @@ package com.thibault.gyft;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.graphics.PorterDuff;
+import android.support.v4.content.res.ResourcesCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,25 +15,6 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
-import android.app.Notification;
-import android.content.Context;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.ImageView;
-import android.widget.TextView;
-
-import java.io.ByteArrayOutputStream;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Thibault on 12/24/2016.
@@ -107,6 +90,7 @@ public final class GridViewAdapter extends BaseAdapter {
         gift.setImageResource(item.giftId);
 
 
+
         //Set click listener for each view, to send to store view
         //TO DO: send info in the Transaction
         v.setOnClickListener(new View.OnClickListener() {
@@ -115,6 +99,7 @@ public final class GridViewAdapter extends BaseAdapter {
                 StoreFragment fragment = new StoreFragment();
                 fragmentTransaction.replace(R.id.store_container, fragment);
                 fragmentTransaction.commit();
+
             }
         });
         return v;

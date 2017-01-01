@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--Header colors-->
     <color name="colorPrimary">#b72629</color>
     <color name="colorPrimaryDark">#b72629</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#ffcd03</color>
+    <color name="white">#ffffff</color>
 
     <!--GridView colors-->
     <color name="store_name">#ffffff</color>

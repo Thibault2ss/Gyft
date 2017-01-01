@@ -19,23 +19,44 @@
         android:layout_width="@dimen/toggle_width"
         android:layout_height="@dimen/toggle_height"
         android:orientation="horizontal"
-        android:layout_marginBottom="15dp"
+        android:layout_marginBottom="@dimen/margin_bottom_toggle"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
         >
-        <Button
-            android:id="@+id/gridview_button"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_weight="1"
-            android:background="@drawable/selector_toggle_left" />
-
-        <Button
-            android:id="@+id/storeview_button"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:background="@drawable/selector_toggle_right"
-            android:layout_weight="1"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+                <Button
+                    android:id="@+id/gridview_button"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:background="@drawable/selector_toggle_left" />
+                <ImageView
+                    android:id="@+id/gridview_icon"
+                    android:translationZ="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/grid_icon"
+                    android:layout_margin="@dimen/margin_img_toggle" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+                <Button
+                    android:id="@+id/storeview_button"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:background="@drawable/selector_toggle_right" />
+                <ImageView
+                    android:id="@+id/storeview_icon"
+                    android:translationZ="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/store_icon"
+                    android:layout_margin="@dimen/margin_img_toggle" />
+            </RelativeLayout>
     </LinearLayout>
     <ImageView
         android:layout_width="45dp"

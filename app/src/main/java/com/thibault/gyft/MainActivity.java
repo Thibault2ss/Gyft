@@ -3,8 +3,12 @@ package com.thibault.gyft;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Context;
+import android.graphics.PorterDuff;
+import android.location.Geocoder;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.content.res.ResourcesCompat;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
@@ -12,6 +16,7 @@ import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 
@@ -38,7 +43,7 @@ public class MainActivity extends Activity {
 
         // Apporter Fragment Gridview
         //TO DO: FIX BACKSTACK NOT WORKING
-        setGridview();
+        setGridview(this);
 
     }
 
@@ -62,16 +67,24 @@ public class MainActivity extends Activity {
         }
         final Button gridview_button = (Button) header.findViewById(R.id.gridview_button);
         final Button storeview_button = (Button) header.findViewById(R.id.storeview_button);
+        final ImageView gridview_icon = (ImageView) header.findViewById(R.id.gridview_icon);
+        final ImageView storeview_icon = (ImageView) header.findViewById(R.id.storeview_icon);
         View.OnClickListener toggleListener  = new View.OnClickListener(){
             @Override
             public void onClick(View view) {
                 if (view.getId() == R.id.gridview_button){
                     gridview_button.setSelected(true);
+                    gridview_icon.getDrawable().setColorFilter(ResourcesCompat.getColor(getResources(), R.color.colorPrimary, null), PorterDuff.Mode.MULTIPLY);
                     storeview_button.setSelected(false);
+                    storeview_icon.getDrawable().setColorFilter(ResourcesCompat.getColor(getResources(), R.color.white, null), PorterDuff.Mode.MULTIPLY);
+                    getFragmentManager().popBackStack("GridView", 0);
                 }
                 else{
                     gridview_button.setSelected(false);
+                    gridview_icon.getDrawable().setColorFilter(ResourcesCompat.getColor(getResources(), R.color.white, null), PorterDuff.Mode.MULTIPLY);
                     storeview_button.setSelected(true);
+                    storeview_icon.getDrawable().setColorFilter(ResourcesCompat.getColor(getResources(), R.color.colorPrimary, null), PorterDuff.Mode.MULTIPLY);
+                    setStoreview(MainActivity.this);
                 }
             }
         };
@@ -88,12 +101,32 @@ public class MainActivity extends Activity {
         window_width_px = displaymetrics.widthPixels;
     }
 
-    public void setGridview(){
-        FragmentManager fragmentManager = getFragmentManager();
+//    bring grid view fragment
+    public static void setGridview(Activity activity){
+        FragmentManager fragmentManager = activity.getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         GridFragment gridFragment = new GridFragment();
         fragmentTransaction.add(R.id.store_container, gridFragment);
-        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.addToBackStack("GridView");
         fragmentTransaction.commit();
+    }
+    //    bring store view fragment
+    public static void setStoreview(Activity activity){
+        FragmentManager fragmentManager = activity.getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        StoreFragment storeFragment = new StoreFragment();
+        fragmentTransaction.replace(R.id.store_container, storeFragment);
+        fragmentTransaction.addToBackStack("StoreView");
+        fragmentTransaction.commit();
+    }
+    public class LocationFinder {
+        private Context myContext;
+        private Geocoder geocoder;
+        public LocationFinder(Context context)
+        {
+            myContext = context;
+            geocoder = new Geocoder(myContext);
+        }
+
     }
 }
