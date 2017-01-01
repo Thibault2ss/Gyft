@@ -67,29 +67,10 @@ public class MainActivity extends Activity {
         }
         final Button gridview_button = (Button) header.findViewById(R.id.gridview_button);
         final Button storeview_button = (Button) header.findViewById(R.id.storeview_button);
-        final ImageView gridview_icon = (ImageView) header.findViewById(R.id.gridview_icon);
-        final ImageView storeview_icon = (ImageView) header.findViewById(R.id.storeview_icon);
-        View.OnClickListener toggleListener  = new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                if (view.getId() == R.id.gridview_button){
-                    gridview_button.setSelected(true);
-                    gridview_icon.getDrawable().setColorFilter(ResourcesCompat.getColor(getResources(), R.color.colorPrimary, null), PorterDuff.Mode.MULTIPLY);
-                    storeview_button.setSelected(false);
-                    storeview_icon.getDrawable().setColorFilter(ResourcesCompat.getColor(getResources(), R.color.white, null), PorterDuff.Mode.MULTIPLY);
-                    getFragmentManager().popBackStack("GridView", 0);
-                }
-                else{
-                    gridview_button.setSelected(false);
-                    gridview_icon.getDrawable().setColorFilter(ResourcesCompat.getColor(getResources(), R.color.white, null), PorterDuff.Mode.MULTIPLY);
-                    storeview_button.setSelected(true);
-                    storeview_icon.getDrawable().setColorFilter(ResourcesCompat.getColor(getResources(), R.color.colorPrimary, null), PorterDuff.Mode.MULTIPLY);
-                    setStoreview(MainActivity.this);
-                }
-            }
-        };
-        gridview_button.setOnClickListener(toggleListener);
-        storeview_button.setOnClickListener(toggleListener);
+
+
+        gridview_button.setOnClickListener(toggleListener(this));
+        storeview_button.setOnClickListener(toggleListener(this));
         gridview_button.performClick();
     }
 
@@ -128,5 +109,33 @@ public class MainActivity extends Activity {
             geocoder = new Geocoder(myContext);
         }
 
+    }
+
+    public static View.OnClickListener toggleListener(final Activity activity){
+        final View header = activity.findViewById(R.id.header);
+        final Button gridview_button = (Button) header.findViewById(R.id.gridview_button);
+        final Button storeview_button = (Button) header.findViewById(R.id.storeview_button);
+        final ImageView gridview_icon = (ImageView) header.findViewById(R.id.gridview_icon);
+        final ImageView storeview_icon = (ImageView) header.findViewById(R.id.storeview_icon);
+        View.OnClickListener toggleListener  = new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                if (view.getId() == R.id.gridview_button){
+                    gridview_button.setSelected(true);
+                    gridview_icon.getDrawable().setColorFilter(ResourcesCompat.getColor(activity.getResources(), R.color.colorPrimary, null), PorterDuff.Mode.MULTIPLY);
+                    storeview_button.setSelected(false);
+                    storeview_icon.getDrawable().setColorFilter(ResourcesCompat.getColor(activity.getResources(), R.color.white, null), PorterDuff.Mode.MULTIPLY);
+                    activity.getFragmentManager().popBackStack("GridView", 0);
+                }
+                else {
+                    gridview_button.setSelected(false);
+                    gridview_icon.getDrawable().setColorFilter(ResourcesCompat.getColor(activity.getResources(), R.color.white, null), PorterDuff.Mode.MULTIPLY);
+                    storeview_button.setSelected(true);
+                    storeview_icon.getDrawable().setColorFilter(ResourcesCompat.getColor(activity.getResources(), R.color.colorPrimary, null), PorterDuff.Mode.MULTIPLY);
+                    setStoreview(activity);
+                }
+            }
+        };
+        return toggleListener;
     }
 }

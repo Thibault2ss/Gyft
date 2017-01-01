@@ -1,10 +1,12 @@
 package com.thibault.gyft;
 
+import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.graphics.PorterDuff;
 import android.support.v4.content.res.ResourcesCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -90,18 +92,9 @@ public final class GridViewAdapter extends BaseAdapter {
         gift.setImageResource(item.giftId);
 
 
-
         //Set click listener for each view, to send to store view
         //TO DO: send info in the Transaction
-        v.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                FragmentTransaction fragmentTransaction = frag_manager.beginTransaction();
-                StoreFragment fragment = new StoreFragment();
-                fragmentTransaction.replace(R.id.store_container, fragment);
-                fragmentTransaction.commit();
-
-            }
-        });
+        v.setOnClickListener(MainActivity.toggleListener((Activity)v.getContext()));
         return v;
     }
 
