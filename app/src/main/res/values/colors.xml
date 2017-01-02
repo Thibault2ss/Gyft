@@ -6,6 +6,9 @@
     <color name="colorAccent">#ffcd03</color>
     <color name="white">#ffffff</color>
 
+    <!--menu colors-->
+    <color name="dark_mask">#c4000000</color>
+
     <!--GridView colors-->
     <color name="store_name">#ffffff</color>
     <color name="distance_color">#ffc9cb</color>
