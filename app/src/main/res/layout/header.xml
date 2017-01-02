@@ -8,6 +8,7 @@
     >
 
     <ImageView
+        android:id="@+id/menu_icon"
         android:layout_width="40dp"
         android:layout_height="match_parent"
         android:layout_marginLeft="5dp"
@@ -59,6 +60,7 @@
             </RelativeLayout>
     </LinearLayout>
     <ImageView
+        android:id="@+id/qr_code_icon"
         android:layout_width="45dp"
         android:layout_height="match_parent"
         android:layout_marginRight="5dp"

@@ -12,6 +12,15 @@
     <dimen name="margin_img_toggle">5dp</dimen>
     <dimen name="margin_bottom_toggle">12dp</dimen>
 
+    <!--Menu dimension-->
+    <dimen name="menu_width">270dp</dimen>
+    <dimen name="inv_menu_width">-270dp</dimen>
+    <dimen name="profile_height">200dp</dimen>
+    <dimen name="profile_pic_margin">20dp</dimen>
+    <dimen name="profile_pic_size">80dp</dimen>
+    <dimen name="profile_name_size">17sp</dimen>
+
+
     <!--GridView dimensions-->
     <dimen name="square_margin">2dp</dimen>
     <dimen name="store_size">18sp</dimen>

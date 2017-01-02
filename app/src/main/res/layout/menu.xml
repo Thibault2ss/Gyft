@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/profile_height">
+
+        <com.thibault.gyft.RoundedImageView
+            android:id="@+id/profile_pic"
+            android:layout_width="@dimen/profile_pic_size"
+            android:layout_height="@dimen/profile_pic_size"
+            android:src="@drawable/profile_pic"
+            android:layout_marginTop="@dimen/profile_pic_margin"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
+        <TextView
+            android:id="@+id/profile_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/profile_name_size"
+            android:layout_marginTop="5dp"
+            android:text="Thibault de Saint Sernin"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/profile_pic"/>
+    </RelativeLayout>
+
+</LinearLayout>
