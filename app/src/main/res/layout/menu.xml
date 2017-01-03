@@ -2,7 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:clickable="true">
+    <!--Top header-->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/profile_height">
@@ -22,8 +24,138 @@
             android:textSize="@dimen/profile_name_size"
             android:layout_marginTop="5dp"
             android:text="Thibault de Saint Sernin"
+            android:textStyle="bold"
             android:layout_centerHorizontal="true"
             android:layout_below="@id/profile_pic"/>
     </RelativeLayout>
+    <!--Around Me-->
+    <LinearLayout
+        android:id="@+id/around_me"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/menu_item_height"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/aroundme_icon"
+            android:layout_marginTop="@dimen/menu_item_icon_margin_top"
+            android:layout_marginBottom="@dimen/menu_item_icon_margin_top"
+            android:adjustViewBounds="true"
+            android:layout_weight="@integer/menu_item_icon_weight"
+            android:tint="@color/menu_item_color"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="@integer/menu_item_text_weight"
+            android:textColor="@color/menu_item_color"
+            android:textSize="@dimen/menu_item_text"
+            android:paddingLeft="@dimen/menu_item_text_padding"
+            android:paddingStart="@dimen/menu_item_text_padding"
+            android:text="Around Me"
+            android:padding="10dp"
+            android:gravity="center_vertical"/>
+    </LinearLayout>
+    <!--Map-->
+    <View
+        android:layout_width="@dimen/separator_length"
+        android:layout_height="1dp"
+        android:background="@color/separator_color"
+        android:layout_gravity="right"/>
+    <LinearLayout
+        android:id="@+id/map"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/menu_item_height"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/map_icon"
+            android:layout_marginTop="@dimen/menu_item_icon_margin_top"
+            android:layout_marginBottom="@dimen/menu_item_icon_margin_top"
+            android:adjustViewBounds="true"
+            android:layout_weight="@integer/menu_item_icon_weight"
+            android:tint="@color/menu_item_color"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="@integer/menu_item_text_weight"
+            android:textColor="@color/menu_item_color"
+            android:textSize="@dimen/menu_item_text"
+            android:paddingLeft="@dimen/menu_item_text_padding"
+            android:paddingStart="@dimen/menu_item_text_padding"
+            android:text="Map"
+            android:padding="10dp"
+            android:gravity="center_vertical"/>
+    </LinearLayout>
+    <!--Gifts-->
+    <View
+        android:layout_width="@dimen/separator_length"
+        android:layout_height="1dp"
+        android:background="@color/separator_color"
+        android:layout_gravity="right"/>
+    <LinearLayout
+        android:id="@+id/gifts"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/menu_item_height"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/grey_gift_icon"
+            android:layout_marginTop="@dimen/menu_item_icon_margin_top"
+            android:layout_marginBottom="@dimen/menu_item_icon_margin_top"
+            android:adjustViewBounds="true"
+            android:layout_weight="@integer/menu_item_icon_weight"
+            android:tint="@color/menu_item_color"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="@integer/menu_item_text_weight"
+            android:textColor="@color/menu_item_color"
+            android:textSize="@dimen/menu_item_text"
+            android:paddingLeft="@dimen/menu_item_text_padding"
+            android:paddingStart="@dimen/menu_item_text_padding"
+            android:text="Gifts"
+            android:padding="10dp"
+            android:gravity="center_vertical"/>
+    </LinearLayout>
+    <!--Trades-->
+    <View
+        android:layout_width="@dimen/separator_length"
+        android:layout_height="1dp"
+        android:background="@color/separator_color"
+        android:layout_gravity="right"/>
+    <LinearLayout
+        android:id="@+id/trades"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/menu_item_height"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/cart_icon"
+            android:layout_marginTop="@dimen/menu_item_icon_margin_top"
+            android:layout_marginBottom="@dimen/menu_item_icon_margin_top"
+            android:adjustViewBounds="true"
+            android:layout_weight="@integer/menu_item_icon_weight"
+            android:tint="@color/menu_item_color"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="@integer/menu_item_text_weight"
+            android:textColor="@color/menu_item_color"
+            android:textSize="@dimen/menu_item_text"
+            android:paddingLeft="@dimen/menu_item_text_padding"
+            android:paddingStart="@dimen/menu_item_text_padding"
+            android:text="Trades"
+            android:padding="10dp"
+            android:gravity="center_vertical"/>
+    </LinearLayout>
+
+
 
 </LinearLayout>

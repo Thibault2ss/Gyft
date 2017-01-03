@@ -8,6 +8,9 @@
 
     <!--menu colors-->
     <color name="dark_mask">#c4000000</color>
+    <color name="menu_item_color">#616161</color>
+    <color name="main_separator_color">#707070</color>
+    <color name="separator_color">#a7a7a7</color>
 
     <!--GridView colors-->
     <color name="store_name">#ffffff</color>

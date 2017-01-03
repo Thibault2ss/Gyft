@@ -10,9 +10,7 @@
         android:layout_height="match_parent"
         android:translationZ="100dp"
         android:background="@color/white"
-        android:layout_marginLeft="@dimen/inv_menu_width"
-        android:clickable="true">
-        <include layout="@layout/menu"/>
+        android:layout_marginLeft="@dimen/inv_menu_width">
     </RelativeLayout>
     <RelativeLayout
         android:id="@+id/dark_mask"

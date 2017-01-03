@@ -19,6 +19,11 @@
     <dimen name="profile_pic_margin">20dp</dimen>
     <dimen name="profile_pic_size">80dp</dimen>
     <dimen name="profile_name_size">17sp</dimen>
+    <dimen name="menu_item_height">50dp</dimen>
+    <dimen name="menu_item_icon_margin_top">10dp</dimen>
+    <dimen name="menu_item_text">18sp</dimen>
+    <dimen name="separator_length">190dp</dimen>
+    <dimen name="menu_item_text_padding">20dp</dimen>
 
 
     <!--GridView dimensions-->

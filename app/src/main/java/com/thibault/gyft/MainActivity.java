@@ -42,11 +42,11 @@ public class MainActivity extends Activity {
     public static int window_width_px=0;
     public View header=null;
     public ImageView menu_icon = null;
-    public RelativeLayout menu_container=null;
+    public static RelativeLayout menu_container=null;
     public RelativeLayout dark_mask=null;
-    public int menu_left_margin=0;
+    public static int menu_left_margin=0;
     public Context mcontext=null;
-    public Boolean menuOpen=Boolean.FALSE;
+    public static Boolean menuOpen=Boolean.FALSE;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -60,14 +60,17 @@ public class MainActivity extends Activity {
         setHeader();
         header=findViewById(R.id.header);
 
+        //Bring Menu from fragment
+        setMenu(this);
+
         // Apporter Fragment Gridview
-        //TO DO: FIX BACKSTACK NOT WORKING
+// TO DO: FIX BACKSTACK NOT WORKING
         setGridview(this);
 
         //Set Onclick listener for menu and dark mask
-        menu_icon = (ImageView) header.findViewById(R.id.menu_icon);
-        dark_mask = (RelativeLayout) findViewById(R.id.dark_mask);
+        menu_icon = (ImageView) findViewById(R.id.menu_icon);
         menu_icon.setOnClickListener(menuListener(this));
+        dark_mask = (RelativeLayout) findViewById(R.id.dark_mask);
         dark_mask.setOnClickListener(menuListener(this));
 
         //Get original left margin of menu
@@ -113,6 +116,14 @@ public class MainActivity extends Activity {
         getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
         window_height_px = displaymetrics.heightPixels;
         window_width_px = displaymetrics.widthPixels;
+    }
+    //bring menu view fragment
+    public static void setMenu(Activity activity){
+        FragmentManager fragmentManager = activity.getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        MenuFragment menuFragment = new MenuFragment();
+        fragmentTransaction.add(R.id.menu_container, menuFragment);
+        fragmentTransaction.commit();
     }
     //bring grid view fragment
     public static void setGridview(Activity activity){
@@ -161,8 +172,8 @@ public class MainActivity extends Activity {
         return toggleListener;
     }
     //Handle Slider menu animation
-    public  View.OnClickListener menuListener(final Activity activity){
-        final View dark_mask=findViewById(R.id.dark_mask)  ;
+    public static View.OnClickListener menuListener(final Activity activity){
+        final View dark_mask=activity.findViewById(R.id.dark_mask)  ;
         View.OnClickListener menuListener  = new View.OnClickListener(){
             @Override
             public void onClick(View view) {
@@ -181,7 +192,7 @@ public class MainActivity extends Activity {
         return menuListener;
     }
     //    Animation menu appear
-    private TranslateAnimation menuAppear(final int fromMargin,Activity activity) {
+    private static TranslateAnimation menuAppear(final int fromMargin,Activity activity) {
         final View menu_container = activity.findViewById(R.id.menu_container);
         TranslateAnimation animation = new TranslateAnimation(0, -fromMargin, 0, 0);
         animation.setDuration(250);
@@ -199,7 +210,7 @@ public class MainActivity extends Activity {
         return animation;
     }
     //    Animation for menu disappear
-    private TranslateAnimation menuDisappear(final int toMargin,Activity activity) {
+    private static TranslateAnimation menuDisappear(final int toMargin,Activity activity) {
         final View menu_container = activity.findViewById(R.id.menu_container);
         TranslateAnimation animation = new TranslateAnimation(0, toMargin, 0, 0);
         animation.setDuration(250);
@@ -217,7 +228,7 @@ public class MainActivity extends Activity {
         return animation;
     }
     //FadeIn animation for dark mask
-    private Animation FadeIn(final int duration,Activity activity) {
+    private static Animation FadeIn(final int duration,Activity activity) {
         final View dark_mask = activity.findViewById(R.id.dark_mask);
         Animation fadeIn = new AlphaAnimation(0, 1);
         fadeIn.setInterpolator(new DecelerateInterpolator()); //add this
@@ -236,7 +247,7 @@ public class MainActivity extends Activity {
         return fadeIn;
     }
     //FadeOut animation for dark mask
-    private Animation FadeOut(final int duration,Activity activity) {
+    private static Animation FadeOut(final int duration,Activity activity) {
         final View dark_mask = activity.findViewById(R.id.dark_mask);
         Animation fadeOut = new AlphaAnimation(1, 0);
         fadeOut.setInterpolator(new DecelerateInterpolator());
@@ -255,7 +266,7 @@ public class MainActivity extends Activity {
         return fadeOut;
     }
     //Method to set bottom margin
-    private void setLeftMargin(View view, int bottomMargin) {
+    private static void setLeftMargin(View view, int bottomMargin) {
         ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams)view.getLayoutParams();
         layoutParams.leftMargin = bottomMargin;
         view.requestLayout();
