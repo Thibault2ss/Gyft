@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
@@ -10,12 +11,25 @@
         android:adjustViewBounds="true"
         android:layout_below="@id/header"
         />
+
     <RelativeLayout
         android:id="@+id/sumup_bar"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:background="@color/sumup_bar"
-        android:layout_alignParentBottom="true">
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        >
+        <View
+            android:id="@+id/transparent_top"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@android:color/transparent"
+            />
+        <RelativeLayout
+            android:id="@+id/footer"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_below="@id/transparent_top"
+            android:background="@color/sumup_bar">
 
             <TextView
                 android:id="@+id/store_name"
@@ -38,30 +52,41 @@
                 android:layout_below="@+id/store_name"
                 android:src="@drawable/gift_100"
                 />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_height="300dp"
+            android:layout_width="match_parent"
+            android:background="@color/colorAccent"
+            android:layout_below="@id/footer"/>
     </RelativeLayout>
-    <ImageView
-        android:id="@+id/direction_button"
-        android:layout_width="@dimen/dir_button"
-        android:layout_height="@dimen/dir_button"
-        android:src="@drawable/direction_button"
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/floating_button"
+        android:src="@drawable/ic_navigation"
+        app:rippleColor="@color/colorAccent"
+        app:fabSize="normal"
         android:layout_alignParentRight="true"
-        android:layout_above="@id/sumup_bar"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="@dimen/dir_overlap"
+        android:layout_marginRight="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         />
     <TextView
         android:id="@+id/distance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingLeft="0dp"
-        android:paddingRight="10dp"
-        android:layout_marginTop="@dimen/dir_overlap_inv"
+        android:paddingRight="3dp"
+        android:layout_marginTop="@dimen/distance_top_margin"
         android:textSize="@dimen/distance_size1"
         android:textColor="@color/distance_color1"
         android:text="4 miles"
-        android:layout_below="@+id/direction_button"
-        android:layout_alignRight="@+id/direction_button"
-        android:layout_alignEnd="@+id/direction_button"
-        android:gravity="center"/>
+        android:layout_below="@+id/floating_button"
+        android:layout_alignRight="@+id/floating_button"
+        android:layout_alignLeft="@+id/floating_button"
+        android:layout_alignEnd="@+id/floating_button"
+        android:gravity="center"
+        />
 
 </RelativeLayout>

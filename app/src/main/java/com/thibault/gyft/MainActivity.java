@@ -38,8 +38,10 @@ public class MainActivity extends Activity {
         }
         return status_bar_height;
     }
-    public static int window_height_px=0;
-    public static int window_width_px=0;
+    public static int screen_height_px=0;
+    public static int screen_width_px=0;
+    public static int statusBarHeight=0;
+    public static int header_height;
     public View header=null;
     public ImageView menu_icon = null;
     public static RelativeLayout menu_container=null;
@@ -55,24 +57,21 @@ public class MainActivity extends Activity {
 
         //set context
         mcontext=this;
-
+        //Get Screen Dimensions
+        getScreenDim();
         //Set Header to right size and transparence
         setHeader();
         header=findViewById(R.id.header);
-
         //Bring Menu from fragment
         setMenu(this);
-
         // Apporter Fragment Gridview
 // TO DO: FIX BACKSTACK NOT WORKING
         setGridview(this);
-
         //Set Onclick listener for menu and dark mask
         menu_icon = (ImageView) findViewById(R.id.menu_icon);
         menu_icon.setOnClickListener(menuListener(this));
         dark_mask = (RelativeLayout) findViewById(R.id.dark_mask);
         dark_mask.setOnClickListener(menuListener(this));
-
         //Get original left margin of menu
         menu_container=(RelativeLayout) findViewById(R.id.menu_container);
         RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) menu_container.getLayoutParams();
@@ -90,32 +89,32 @@ public class MainActivity extends Activity {
             Window w = getWindow();
             w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
             header.setPadding(0,getStatusBarHeight(),0,0);
-            Log.v("testAAAA",String.valueOf(getStatusBarHeight()));
             header.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
                 @Override
                 public void onGlobalLayout() {
-                    header.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                    final int header_height=header.getHeight();
-                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,header_height+getStatusBarHeight());
+                    header_height=header.getHeight();
+                    statusBarHeight=getStatusBarHeight();
+                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,header_height+statusBarHeight);
                     header.setLayoutParams(params);
+                    header.getViewTreeObserver().removeOnGlobalLayoutListener(this);
                 }
             });
         }
         final Button gridview_button = (Button) header.findViewById(R.id.gridview_button);
         final Button storeview_button = (Button) header.findViewById(R.id.storeview_button);
 
-
+        header_height=header.getHeight();
         gridview_button.setOnClickListener(toggleListener(this));
         storeview_button.setOnClickListener(toggleListener(this));
         gridview_button.performClick();
     }
     //Method to get screen dimension
-    public void getWindowDim(){
-        //        get height qnd width of screen
+    public void getScreenDim(){
+        //        get height and width of screen
         DisplayMetrics displaymetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
-        window_height_px = displaymetrics.heightPixels;
-        window_width_px = displaymetrics.widthPixels;
+        screen_height_px = displaymetrics.heightPixels;
+        screen_width_px = displaymetrics.widthPixels;
     }
     //bring menu view fragment
     public static void setMenu(Activity activity){

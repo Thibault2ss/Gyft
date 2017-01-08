@@ -3,11 +3,11 @@
     <!--Header colors-->
     <color name="colorPrimary">#b72629</color>
     <color name="colorPrimaryDark">#b72629</color>
-    <color name="colorAccent">#ffcd03</color>
+    <color name="colorAccent">#4285f4</color>
     <color name="white">#ffffff</color>
 
     <!--menu colors-->
-    <color name="dark_mask">#c4000000</color>
+    <color name="dark_mask">#a9000000</color>
     <color name="menu_item_color">#616161</color>
     <color name="main_separator_color">#707070</color>
     <color name="separator_color">#a7a7a7</color>
