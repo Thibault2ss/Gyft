@@ -39,6 +39,7 @@
     <dimen name="gift_margin">10dp</dimen>
     <dimen name="dir_button">70dp</dimen>
     <dimen name="distance_top_margin">5dp</dimen>
+    <dimen name="footer_height">100dp</dimen>
 
 
 </resources>

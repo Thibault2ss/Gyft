@@ -4,89 +4,106 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
-    <ImageView
-        android:id="@+id/picture"
+    <RelativeLayout
+        android:id="@+id/spacer_top"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
-        android:layout_below="@id/header"
+        android:layout_height="0dp"/>
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/mapView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/spacer_top"
         />
 
-    <RelativeLayout
-        android:id="@+id/sumup_bar"
+    <ScrollView
+        android:id="@+id/sv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
         >
-        <View
-            android:id="@+id/transparent_top"
+
+        <RelativeLayout
+            android:id="@+id/sv_layout"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:background="@android:color/transparent"
-            />
-        <RelativeLayout
-            android:id="@+id/footer"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_below="@id/transparent_top"
-            android:background="@color/sumup_bar">
+            >
+            <View
+                android:id="@+id/transparent"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:clickable="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false"/>
+            <RelativeLayout
+                android:id="@+id/footer_container"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_below="@id/transparent"
+                android:background="@color/colorPrimary">
+                <ImageView
+                    android:id="@+id/picture"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:layout_below="@+id/footer"
+                    />
+                <RelativeLayout
+                    android:id="@+id/footer"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/footer_height"
+                    android:background="@color/sumup_bar">
 
-            <TextView
-                android:id="@+id/store_name"
+                    <TextView
+                        android:id="@+id/store_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/store_size1"
+                        android:paddingLeft="20dp"
+                        android:paddingRight="10dp"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="0dp"
+                        android:textColor="@color/store_name1"
+                        />
+
+                    <ImageView
+                        android:id="@+id/gift"
+                        android:layout_width="@dimen/gift1"
+                        android:layout_height="@dimen/gift1"
+                        android:layout_margin="@dimen/gift_margin"
+                        android:adjustViewBounds="true"
+                        android:layout_below="@+id/store_name"
+                        android:src="@drawable/gift_100"
+                        />
+
+                </RelativeLayout>
+            </RelativeLayout>
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/floating_button"
+                android:src="@drawable/ic_navigation"
+                app:rippleColor="@color/colorAccent"
+                app:fabSize="normal"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="20dp"
+                android:layout_alignTop="@id/footer_container"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/store_size1"
-                android:paddingLeft="20dp"
-                android:paddingRight="10dp"
-                android:paddingTop="10dp"
-                android:paddingBottom="0dp"
-                android:textColor="@color/store_name1"
                 />
-
-            <ImageView
-                android:id="@+id/gift"
-                android:layout_width="@dimen/gift1"
-                android:layout_height="@dimen/gift1"
-                android:layout_margin="@dimen/gift_margin"
-                android:adjustViewBounds="true"
-                android:layout_below="@+id/store_name"
-                android:src="@drawable/gift_100"
+            <TextView
+                android:id="@+id/distance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="0dp"
+                android:paddingRight="3dp"
+                android:layout_marginTop="@dimen/distance_top_margin"
+                android:textSize="@dimen/distance_size1"
+                android:textColor="@color/distance_color1"
+                android:text="4 miles"
+                android:layout_below="@+id/floating_button"
+                android:layout_alignRight="@+id/floating_button"
+                android:layout_alignLeft="@+id/floating_button"
+                android:layout_alignEnd="@+id/floating_button"
+                android:gravity="center"
                 />
-
         </RelativeLayout>
-
-        <View
-            android:layout_height="300dp"
-            android:layout_width="match_parent"
-            android:background="@color/colorAccent"
-            android:layout_below="@id/footer"/>
-    </RelativeLayout>
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/floating_button"
-        android:src="@drawable/ic_navigation"
-        app:rippleColor="@color/colorAccent"
-        app:fabSize="normal"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="20dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        />
-    <TextView
-        android:id="@+id/distance"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingLeft="0dp"
-        android:paddingRight="3dp"
-        android:layout_marginTop="@dimen/distance_top_margin"
-        android:textSize="@dimen/distance_size1"
-        android:textColor="@color/distance_color1"
-        android:text="4 miles"
-        android:layout_below="@+id/floating_button"
-        android:layout_alignRight="@+id/floating_button"
-        android:layout_alignLeft="@+id/floating_button"
-        android:layout_alignEnd="@+id/floating_button"
-        android:gravity="center"
-        />
+    </ScrollView>
 
 </RelativeLayout>

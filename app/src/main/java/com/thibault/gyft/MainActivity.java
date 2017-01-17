@@ -4,15 +4,23 @@ import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.content.pm.PackageManager;
+import android.content.res.Resources;
+import android.graphics.Color;
+import android.graphics.Point;
 import android.graphics.PorterDuff;
 import android.location.Geocoder;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.content.res.ResourcesCompat;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.util.TypedValue;
+import android.view.Display;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
@@ -27,22 +35,17 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
+import com.readystatesoftware.systembartint.SystemBarTintManager;
+
 
 public class MainActivity extends Activity {
-
-    public int getStatusBarHeight() {
-        int status_bar_height = 0;
-        int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
-        if (resourceId > 0) {
-            status_bar_height = getResources().getDimensionPixelSize(resourceId);
-        }
-        return status_bar_height;
-    }
-    public static int screen_height_px=0;
-    public static int screen_width_px=0;
-    public static int statusBarHeight=0;
+    public int MY_PERMISSIONS_REQUEST_ACCESS_LOCATION=1;
+    public static int screen_height_px;
+    public static int screen_width_px;
+    public static int statusBarHeight;
+    public static int NavigationBarHeight;
     public static int header_height;
-    public View header=null;
+    public static View header=null;
     public ImageView menu_icon = null;
     public static RelativeLayout menu_container=null;
     public RelativeLayout dark_mask=null;
@@ -54,59 +57,84 @@ public class MainActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        //set context
         mcontext=this;
+        //get status bar height
+        statusBarHeight=getStatusBarHeight();
         //Get Screen Dimensions
         getScreenDim();
-        //Set Header to right size and transparence
+        //Status Bar tint color
+        setStatusBarTint(this,"#000000FF");
+        //Set Header to right size and transparence, and its click and touch listeners
         setHeader();
         header=findViewById(R.id.header);
-        //Bring Menu from fragment
+        //Bring Menu from fragment and its listeners
         setMenu(this);
-        // Apporter Fragment Gridview
-// TO DO: FIX BACKSTACK NOT WORKING
+        // Apporter Fragment Gridview, and set its top spacer to be the header height
         setGridview(this);
-        //Set Onclick listener for menu and dark mask
-        menu_icon = (ImageView) findViewById(R.id.menu_icon);
-        menu_icon.setOnClickListener(menuListener(this));
-        dark_mask = (RelativeLayout) findViewById(R.id.dark_mask);
-        dark_mask.setOnClickListener(menuListener(this));
-        //Get original left margin of menu
+        //Get Menu left margin
         menu_container=(RelativeLayout) findViewById(R.id.menu_container);
         RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) menu_container.getLayoutParams();
         menu_left_margin=lp.leftMargin;
 
+
+        // Localisation Permissions
+        checkPermissions(this);
+
     }
 
 
-
+    //Set Status Bar Tint color method
+    public void setStatusBarTint(Activity activity,String color){
+        // create our manager instance after the content view is set
+        SystemBarTintManager tintManager = new SystemBarTintManager(activity);
+        // enable status bar tint
+        tintManager.setStatusBarTintEnabled(true);
+        // enable navigation bar tint
+        tintManager.setNavigationBarTintEnabled(true);
+    // set a custom tint color for all system bars
+        tintManager.setTintColor(Color.parseColor(color));
+    }
     //Set header and adjust it with status bar
     public void setHeader(){
         final View header = findViewById(R.id.header);
         // if api level sufficient, set status bar transparent, get header height and add status bar height to it plus padding
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT) {
             Window w = getWindow();
+
             w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
             header.setPadding(0,getStatusBarHeight(),0,0);
             header.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
                 @Override
                 public void onGlobalLayout() {
                     header_height=header.getHeight();
-                    statusBarHeight=getStatusBarHeight();
-                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,header_height+statusBarHeight);
+                    RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,header_height+statusBarHeight);
                     header.setLayoutParams(params);
                     header.getViewTreeObserver().removeOnGlobalLayoutListener(this);
                 }
             });
         }
+        //Set Onclick listener for menu icon and dark mask
+        menu_icon = (ImageView) findViewById(R.id.menu_icon);
+        menu_icon.setOnClickListener(menuListener(this));
+        dark_mask = (RelativeLayout) findViewById(R.id.dark_mask);
+        dark_mask.setOnClickListener(menuListener(this));
+
+        //Set Toggle Listeners for view change icons
         final Button gridview_button = (Button) header.findViewById(R.id.gridview_button);
         final Button storeview_button = (Button) header.findViewById(R.id.storeview_button);
-
         header_height=header.getHeight();
         gridview_button.setOnClickListener(toggleListener(this));
         storeview_button.setOnClickListener(toggleListener(this));
         gridview_button.performClick();
+    }
+    //Method to get status bar height
+    public int getStatusBarHeight() {
+        int status_bar_height = 0;
+        int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            status_bar_height = getResources().getDimensionPixelSize(resourceId);
+        }
+        return status_bar_height;
     }
     //Method to get screen dimension
     public void getScreenDim(){
@@ -115,6 +143,11 @@ public class MainActivity extends Activity {
         getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
         screen_height_px = displaymetrics.heightPixels;
         screen_width_px = displaymetrics.widthPixels;
+        Resources resources = this.getResources();
+        int resourceId = resources.getIdentifier("navigation_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            NavigationBarHeight=resources.getDimensionPixelSize(resourceId);
+        }
     }
     //bring menu view fragment
     public static void setMenu(Activity activity){
@@ -269,6 +302,32 @@ public class MainActivity extends Activity {
         ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams)view.getLayoutParams();
         layoutParams.leftMargin = bottomMargin;
         view.requestLayout();
+    }
+    //Method to check and ask Permissions
+    public void checkPermissions(Activity activity){
+        if (ContextCompat.checkSelfPermission(activity, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+            // Should we show an explanation?
+            if (ActivityCompat.shouldShowRequestPermissionRationale(activity,
+                    android.Manifest.permission.ACCESS_FINE_LOCATION)) {
+
+                // Show an explanation to the user *asynchronously* -- don't block
+                // this thread waiting for the user's response! After the user
+                // sees the explanation, try again to request the permission.
+
+            } else {
+
+                // No explanation needed, we can request the permission.
+
+                ActivityCompat.requestPermissions(activity,
+                        new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, MY_PERMISSIONS_REQUEST_ACCESS_LOCATION);
+
+                // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
+                // app-defined int constant. The callback method gets the
+                // result of the request.
+            }
+        }
+
     }
     //Method to convert dip to pixel-not used for now
     private int dipsToPixels(int dips) {
