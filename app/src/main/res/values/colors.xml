@@ -3,17 +3,22 @@
 
     <!--Status Bar tint-->
     <color name="statusBarTint1">#00ffffff</color>
+    <color name="white">#ffffff</color>
     <!--Header colors-->
     <color name="colorPrimary">#b72629</color>
     <color name="colorPrimaryDark">#b72629</color>
     <color name="colorAccent">#4285f4</color>
-    <color name="white">#ffffff</color>
+    <color name="buttons_default">#ffffff</color>
+    <color name="buttons_when_header_transparent">#b4393939</color>
 
     <!--menu colors-->
     <color name="dark_mask">#a9000000</color>
-    <color name="menu_item_color">#616161</color>
-    <color name="main_separator_color">#707070</color>
-    <color name="separator_color">#a7a7a7</color>
+    <color name="name_color">#101010</color>
+    <color name="menu_item_color">#e9e9e9</color>
+    <color name="menu_background1">#e9e9e9</color>
+    <color name="menu_background2">#841b1e</color>
+    <color name="color_level_1">#d2bf15</color>
+    <color name="text_higlight">#e6d328</color>
 
     <!--GridView colors-->
     <color name="store_name">#ffffff</color>
